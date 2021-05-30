@@ -45,6 +45,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define AltMask Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -59,6 +60,16 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *slockcmd[] = { "slock", NULL };
+static const char *screencap_selection_cmd[] = { "screenshot.sh", "-s", "selection", "-c", "image", NULL };
+static const char *screencap_full_cmd[] = { "screenshot.sh", "-s", "whole", "-c", "image", NULL };
+static const char *screencap_selection_link_cmd[] = { "screenshot.sh", "-s", "selection", "-c", "link", NULL };
+static const char *screencap_full_link_cmd[] = { "screenshot.sh", "-s", "whole", "-c", "link", NULL };
+static const char *textbookcmd[] = { "textbook_opener.sh", NULL };
+static const char *laptopscreencmd[] = { "laptop_screen.sh", NULL };
+static const char *deskscreencmd[] = { "one_desk_screen.sh", NULL };
+static const char *testbenchscreencmd[] = { "testbench_screens.sh", NULL };
+static const char *runclipboardcmd[] = { "runclip.sh", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -86,7 +97,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     /* START: Custom bindings */
-    { MODKEY|ShiftMask|ControlMask,    XK_l,      spawn,           {.v = slockcmd} },
+    { MODKEY|ShiftMask|ControlMask, XK_l,      spawn,           {.v = slockcmd} },
+    { MODKEY,                       XK_z,      spawn,           {.v = screencap_full_cmd} },
+    { MODKEY|ShiftMask,             XK_z,      spawn,           {.v = screencap_selection_cmd} },
+    { MODKEY|AltMask,               XK_z,      spawn,           {.v = screencap_full_link_cmd} },
+    { MODKEY|ShiftMask|AltMask,     XK_z,      spawn,           {.v = screencap_selection_link_cmd} },
+    { MODKEY|ShiftMask,             XK_t,      spawn,           {.v = textbookcmd} },
+    { MODKEY|ShiftMask|ControlMask, XK_1,      spawn,           {.v = laptopscreencmd} },
+    { MODKEY|ShiftMask|ControlMask, XK_2,      spawn,           {.v = deskscreencmd} },
+    { MODKEY|ShiftMask|ControlMask, XK_3,      spawn,           {.v = testbenchscreencmd} },
+    { MODKEY|ControlMask,           XK_p,      spawn,           {.v = runclipboardcmd} },
     /* END: Custom bindings */  
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
