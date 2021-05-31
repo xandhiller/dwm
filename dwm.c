@@ -1,4 +1,6 @@
 /* See LICENSE file for copyright and license details.
+ * 
+ * Alex's version
  *
  * dynamic window manager is designed like any other X client as well. It is
  * driven through handling X events. In contrast to other X clients, a window
