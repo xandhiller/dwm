@@ -82,8 +82,9 @@ static const char *laptopscreencmd[] = { "laptop_screen.sh", NULL };
 static const char *deskscreencmd[] = { "one_desk_screen.sh", NULL };
 static const char *testbenchscreencmd[] = { "testbench_screens.sh", NULL };
 static const char *runclipboardcmd[] = { "runclip.sh", NULL };
-static const char *brightness_inc_cmd[] = { "xbacklight", "-inc", "10", NULL };
-static const char *brightness_dec_cmd[] = { "xbacklight", "-dec", "10", NULL };
+static const char *brightness_inc_cmd[] = { "xbacklight", "-inc", "5", NULL };
+static const char *brightness_dec_cmd[] = { "xbacklight", "-dec", "5", NULL };
+static const char *toggle_touchpad_cmd[] = { "toggle_touchpad.sh", NULL };
 
 
 static Key keys[] = {
@@ -134,8 +135,9 @@ static Key keys[] = {
     { MODKEY|ShiftMask|ControlMask, XK_2,      spawn,           {.v = deskscreencmd} },
     { MODKEY|ShiftMask|ControlMask, XK_3,      spawn,           {.v = testbenchscreencmd} },
     { MODKEY|ControlMask,           XK_p,      spawn,           {.v = runclipboardcmd} },
-    { False,           XF86XK_MonBrightnessUp,  spawn,          {.v = brightness_inc_cmd} },
+    { False,           XF86XK_MonBrightnessUp,    spawn,        {.v = brightness_inc_cmd} },
     { False,           XF86XK_MonBrightnessDown,  spawn,        {.v = brightness_dec_cmd} },
+    { False,                        XK_F9,      spawn,          {.v = toggle_touchpad_cmd } },
 
 
     /* END: Custom bindings */  
