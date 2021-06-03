@@ -1,15 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int igappx    = 13;        /* size of inner gaps */
 static const unsigned int ogappx    = 13;        /* size of outer gaps */
 static const int gapsforone	    = 1;	/* 1 enable gaps when only one window is open */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "monospace:size=12" };
+static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -71,6 +71,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+/* Custom commands */
 static const char *slockcmd[] = { "slock", NULL };
 static const char *screencap_selection_cmd[] = { "screenshot.sh", "-s", "selection", "-c", "image", NULL };
 static const char *screencap_full_cmd[] = { "screenshot.sh", "-s", "whole", "-c", "image", NULL };
@@ -81,6 +82,8 @@ static const char *laptopscreencmd[] = { "laptop_screen.sh", NULL };
 static const char *deskscreencmd[] = { "one_desk_screen.sh", NULL };
 static const char *testbenchscreencmd[] = { "testbench_screens.sh", NULL };
 static const char *runclipboardcmd[] = { "runclip.sh", NULL };
+static const char *brightness_inc_cmd[] = { "xbacklight", "-inc", "10", NULL };
+static const char *brightness_dec_cmd[] = { "xbacklight", "-dec", "10", NULL };
 
 
 static Key keys[] = {
@@ -131,6 +134,10 @@ static Key keys[] = {
     { MODKEY|ShiftMask|ControlMask, XK_2,      spawn,           {.v = deskscreencmd} },
     { MODKEY|ShiftMask|ControlMask, XK_3,      spawn,           {.v = testbenchscreencmd} },
     { MODKEY|ControlMask,           XK_p,      spawn,           {.v = runclipboardcmd} },
+    { False,           XF86XK_MonBrightnessUp,  spawn,          {.v = brightness_inc_cmd} },
+    { False,           XF86XK_MonBrightnessDown,  spawn,        {.v = brightness_dec_cmd} },
+
+
     /* END: Custom bindings */  
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
