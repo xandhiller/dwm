@@ -1,13 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int igappx    = 13;        /* size of inner gaps */
-static const unsigned int ogappx    = 13;        /* size of outer gaps */
-static const int gapsforone	    = 1;	/* 1 enable gaps when only one window is open */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const unsigned int borderpx  = 4;  /* border pixel of windows */
+static const unsigned int igappx    = 12; /* size of inner gaps */
+static const unsigned int ogappx    = 12; /* size of outer gaps */
+static const int gapsforone	        = 1;  /* 1 enable gaps when only one window is open */
+static const unsigned int snap      = 32; /* snap pixel */
+static const int showbar            = 1;  /* 0 means no bar */
+static const int topbar             = 1;  /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=12" };
 static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#222222";
@@ -22,7 +22,7 @@ static const char *colors[][3]      = {
 	[SchemeNorm]     = { col_gray3, col_gray1,    col_gray2   } ,
 	[SchemeSel]      = { col_gray4, col_feature,  col_feature } ,
 	[SchemeTagsSel]  = { col_gray1, col_feature,  "#000000"   } , // Tagbar left selected       { text,background,not used but cannot be empty }
-    [SchemeInfoSel]  = { col_gray1, col_feature,  "#000000"   } , // infobar middle  selected   { text,background,not used but cannot be empty }
+    [SchemeInfoSel]  = { col_gray3, col_gray2,  "#000000"   } , // infobar middle  selected   { text,background,not used but cannot be empty }
 	[SchemeStatus]   = { col_gray3, col_gray1,  "#000000"     } , // Statusbar right            { text,background,not used but cannot be empty }
     [SchemeTagsNorm] = { col_gray3, col_gray1,  "#000000"     } , // Tagbar left unselected     { text,background,not used but cannot be empty }
     [SchemeInfoNorm] = { col_gray3, col_gray1,  "#000000"     } , // infobar middle  unselected { text,background,not used but cannot be empty }
