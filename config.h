@@ -8,6 +8,7 @@ static const int gapsforone	        = 1;  /* 1 enable gaps when only one window 
 static const unsigned int snap      = 32; /* snap pixel */
 static const int showbar            = 1;  /* 0 means no bar */
 static const int topbar             = 1;  /* 0 means bottom bar */
+static const int focusonwheel       = 0;
 static const char *fonts[]          = { "monospace:size=12" };
 static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#222222";
@@ -112,8 +113,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      setogaps,       {.i = +2 } },
 	{ MODKEY|ControlMask,           XK_o,      setogaps,       {.i = -2 } },
 	{ MODKEY|ShiftMask|ControlMask, XK_o,      setogaps,       {.i = 0  } },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	// { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
 	// { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
