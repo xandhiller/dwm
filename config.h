@@ -1,9 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 4;  /* border pixel of windows */
-static const unsigned int igappx    = 12; /* size of inner gaps */
-static const unsigned int ogappx    = 12; /* size of outer gaps */
+static const unsigned int borderpx  = 3;  /* border pixel of windows */
+static const unsigned int igappx    = 0; /* size of inner gaps */
+static const unsigned int ogappx    = 0; /* size of outer gaps */
 static const int gapsforone	        = 1;  /* 1 enable gaps when only one window is open */
 static const unsigned int snap      = 32; /* snap pixel */
 static const int showbar            = 1;  /* 0 means no bar */
@@ -21,8 +21,7 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm]     = { col_gray3, col_gray1,    col_gray2   } ,
 	[SchemeSel]      = { col_gray4, col_feature,  col_feature } ,
-	[SchemeTagsSel]  = { col_gray1, col_feature,  "#000000"   } , // Tagbar left selected       { text,background,not used but cannot be empty }
-    [SchemeInfoSel]  = { col_gray3, col_gray2,  "#000000"   } , // infobar middle  selected   { text,background,not used but cannot be empty }
+	[SchemeTagsSel]  = { col_gray1, col_feature,  "#000000"   } , // Tagbar left selected       { text,background,not used but cannot be empty } [SchemeInfoSel]  = { col_gray3, col_gray2,  "#000000"   } , // infobar middle  selected   { text,background,not used but cannot be empty }
 	[SchemeStatus]   = { col_gray3, col_gray1,  "#000000"     } , // Statusbar right            { text,background,not used but cannot be empty }
     [SchemeTagsNorm] = { col_gray3, col_gray1,  "#000000"     } , // Tagbar left unselected     { text,background,not used but cannot be empty }
     [SchemeInfoNorm] = { col_gray3, col_gray1,  "#000000"     } , // infobar middle  unselected { text,background,not used but cannot be empty }
@@ -37,7 +36,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	// { "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       0,            0,           -1 },
 	{ "Slack",    NULL,       NULL,       1 << 8,       0,           -1 },
 };
@@ -79,19 +78,20 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 /* Custom commands */
-static const char *slockcmd[] = { "slock", NULL };
-static const char *screencap_selection_cmd[] = { "screenshot.sh", "-s", "selection", "-c", "image", NULL };
-static const char *screencap_full_cmd[] = { "screenshot.sh", "-s", "whole", "-c", "image", NULL };
+static const char *slockcmd[]                     = { "slock", NULL };
+static const char *screencap_selection_cmd[]      = { "screenshot.sh", "-s", "selection", "-c", "image", NULL };
+static const char *screencap_full_cmd[]           = { "screenshot.sh", "-s", "whole", "-c", "image", NULL };
 static const char *screencap_selection_link_cmd[] = { "screenshot.sh", "-s", "selection", "-c", "link", NULL };
-static const char *screencap_full_link_cmd[] = { "screenshot.sh", "-s", "whole", "-c", "link", NULL };
-static const char *textbookcmd[] = { "textbook_opener.sh", NULL };
-static const char *laptopscreencmd[] = { "laptop_screen.sh", NULL };
-static const char *deskscreencmd[] = { "one_desk_screen.sh", NULL };
-static const char *testbenchscreencmd[] = { "testbench_screens.sh", NULL };
-static const char *runclipboardcmd[] = { "runclip.sh", NULL };
-static const char *brightness_inc_cmd[] = { "xbacklight", "-inc", "5", NULL };
-static const char *brightness_dec_cmd[] = { "xbacklight", "-dec", "5", NULL };
-static const char *toggle_touchpad_cmd[] = { "toggle_touchpad.sh", NULL };
+static const char *screencap_full_link_cmd[]      = { "screenshot.sh", "-s", "whole", "-c", "link", NULL };
+static const char *textbookcmd[]                  = { "textbook_opener.sh", NULL };
+static const char *laptopscreencmd[]              = { "laptop_screen.sh", NULL };
+static const char *deskscreencmd[]                = { "one_desk_screen.sh", NULL };
+static const char *mirrorscreencmd[]              = { "mirror_screens.sh", NULL };
+static const char *testbenchscreencmd[]           = { "testbench_screens.sh", NULL };
+static const char *runclipboardcmd[]              = { "runclip.sh", NULL };
+static const char *brightness_inc_cmd[]           = { "xbacklight", "-inc", "5", NULL };
+static const char *brightness_dec_cmd[]           = { "xbacklight", "-dec", "5", NULL };
+static const char *toggle_touchpad_cmd[]          = { "toggle_touchpad.sh", NULL };
 
 
 static Key keys[] = {
@@ -112,8 +112,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      setogaps,       {.i = +2 } },
 	{ MODKEY|ControlMask,           XK_o,      setogaps,       {.i = -2 } },
 	{ MODKEY|ShiftMask|ControlMask, XK_o,      setogaps,       {.i = 0  } },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	// { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
 	// { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
@@ -138,14 +138,16 @@ static Key keys[] = {
     { MODKEY|AltMask,               XK_z,      spawn,           {.v = screencap_full_link_cmd} },
     { MODKEY|ShiftMask|AltMask,     XK_z,      spawn,           {.v = screencap_selection_link_cmd} },
     { MODKEY|ShiftMask,             XK_t,      spawn,           {.v = textbookcmd} },
-    { MODKEY|ShiftMask|ControlMask, XK_1,      spawn,           {.v = laptopscreencmd} },
-    { MODKEY|ShiftMask|ControlMask, XK_2,      spawn,           {.v = deskscreencmd} },
-    { MODKEY|ShiftMask|ControlMask, XK_3,      spawn,           {.v = testbenchscreencmd} },
+    { MODKEY,                       XK_F1,     spawn,           {.v = laptopscreencmd} },
+    { MODKEY,                       XK_F2,     spawn,           {.v = deskscreencmd} },
+    { MODKEY,                       XK_F3,     spawn,           {.v = mirrorscreencmd} },
+    { MODKEY,                       XK_F4,     spawn,           {.v = testbenchscreencmd} },
     { MODKEY|ControlMask,           XK_p,      spawn,           {.v = runclipboardcmd} },
-    { False,           XF86XK_MonBrightnessUp,    spawn,        {.v = brightness_inc_cmd} },
-    { False,           XF86XK_MonBrightnessDown,  spawn,        {.v = brightness_dec_cmd} },
-    { False,                        XK_F9,      spawn,          {.v = toggle_touchpad_cmd } },
-
+    { False,        XF86XK_MonBrightnessUp,    spawn,           {.v = brightness_inc_cmd} },
+    { False,        XF86XK_MonBrightnessDown,  spawn,           {.v = brightness_dec_cmd} },
+    { False,                        XK_F9,     spawn,           {.v = toggle_touchpad_cmd } },
+    { AltMask,                      XK_Tab,    focusstack,      {.i = +1 } }, 
+    { AltMask|ShiftMask,            XK_Tab,    focusstack,      {.i = -1 } }, 
 
     /* END: Custom bindings */  
 	TAGKEYS(                        XK_1,                      0)
