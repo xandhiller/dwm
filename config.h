@@ -36,10 +36,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	// { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       0,            0,           -1 },
-	{ "Slack",    NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class              instance    title       tags mask     switchtotag,    isfloating   monitor */
+	// { "Gimp",          NULL,       NULL,       0,            1,              1,           -1 },
+	{ "Firefox",          NULL,       NULL,       0,            1,              0,           -1 },
+	{ "Slack",            NULL,       NULL,       1 << 8,       1,              0,           -1 },
+	{ "chrome",           NULL,       NULL,       1 << 7,       1,              0,           -1 },
+	{ "st",               NULL,       NULL,       1 << 0,       1,              0,           -1 },
 };
 
 /* layout(s) */
@@ -147,8 +149,8 @@ static Key keys[] = {
     { False,        XF86XK_MonBrightnessUp,    spawn,           {.v = brightness_inc_cmd} },
     { False,        XF86XK_MonBrightnessDown,  spawn,           {.v = brightness_dec_cmd} },
     { False,                        XK_F9,     spawn,           {.v = toggle_touchpad_cmd } },
-    { AltMask,                      XK_Tab,    focusstack,      {.i = +1 } }, 
-    { AltMask|ShiftMask,            XK_Tab,    focusstack,      {.i = -1 } }, 
+    // { AltMask,                      XK_Tab,    focusstack,      {.i = +1 } },   // Conflicts with X2GO
+    // { AltMask|ShiftMask,            XK_Tab,    focusstack,      {.i = -1 } }, 
 
     /* END: Custom bindings */  
 	TAGKEYS(                        XK_1,                      0)
